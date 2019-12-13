@@ -12,6 +12,7 @@ import pols.Polinomio;
 import response.SvcResponse;
 import response.SvcResponseStatus;
 import web.PolinomioDTO;
+import response.MatrixDTO;
 
 
 @RestController
@@ -27,10 +28,24 @@ public class SvcResource {
 		this.svc = svc;
 	}
 	
+
 	@RequestMapping(value = "/value", method = RequestMethod.GET)
 	public SvcResponse getValue(@RequestBody PolinomioDTO p) {
 		p.setY(new Polinomio(p.getCoeficientes()).getValor(p.getX()));
-		return new SvcResponse(SvcResponseStatus.OK, p);
+		//return new SvcResponse(SvcResponseStatus.OK, p);
+		return new SvcResponse(SvcResponseStatus.OK, new Double(new Polinomio(p.getCoeficientes()).getValor(p.getX())));
+	}
+	
+	@RequestMapping(value = "/matrix", method = RequestMethod.GET)
+	public SvcResponse getMatrix(@RequestBody PolinomioDTO p) {
+		int [] c = p.getCoeficientes();
+		int filas = (int) p.getX();
+		int [][] m = new int[filas][c.length];
+		for (int i = 0; i < filas; i++) {
+			m[i] = c;
+		}
+		MatrixDTO matrix = new MatrixDTO(m);
+		return new SvcResponse(SvcResponseStatus.OK, m);
 	}
 	
 	@RequestMapping("/greetings")
