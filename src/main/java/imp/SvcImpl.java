@@ -17,6 +17,7 @@ public class SvcImpl implements ISvcPolinomios {
 	@Override
 	public double getValor(Polinomio p, double x) {
 		return p.getValor(x);
+		
 	}
 
 	@Override
