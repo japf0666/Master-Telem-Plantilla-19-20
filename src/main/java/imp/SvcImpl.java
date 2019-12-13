@@ -21,6 +21,7 @@ public class SvcImpl implements ISvcPolinomios {
 
 	@Override
 	public Polinomio getSuma(Polinomio p, Polinomio q) {
+		
 		return p.sumar(q);
 	}
 	
